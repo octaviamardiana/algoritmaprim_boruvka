@@ -1,0 +1,59 @@
+ # Definisikan himpunan
+P = {1, 2, 3, 4}
+Q = {3, 4, 5, 6}
+R = {5, 6, 7, 8}
+
+# Operasi pertama: P ∩ (Q ∪ R)
+operation1 = P.intersection(Q.union(R))
+
+# Operasi kedua: (P ∩ Q) ∪ (P ∩ R)
+operation2 = (P.intersection(Q)).union(P.intersection(R))
+
+# Operasi ketiga: P ∪ (Q ∩ R)
+operation3 = P.union(Q.intersection(R))
+
+# Operasi keempat: (P ∪ Q) ∩ (P ∪ R)
+operation4 = (P.union(Q)).intersection(P.union(R))
+
+# Cetak hasil operasi himpunan
+print(f"P ∩ (Q ∪ R) = {operation1}")
+print(f"(P ∩ Q) ∪ (P ∩ R) = {operation2}")
+print(f"P ∪ (Q ∩ R) = {operation3}")
+print(f"(P ∪ Q) ∩ (P ∪ R) = {operation4}")
+
+# Validasi sifat distributif
+if operation1 == operation2:
+    print("Sifat distributif pada himpunan irisan terbukti benar.")
+else:
+    print("Sifat distributif pada himpunan irisan tidak terbukti.")
+
+if operation3 == operation4:
+    print("Sifat distributif pada himpunan gabungan terbukti benar.")
+else:
+    print("Sifat distributif pada himpunan gabungan tidak terbukti.")
+
+# Buat diagram Venn 3 himpunan
+plt.figure(figsize=(8, 8))  # Menentukan ukuran figure
+venn = venn3([P, Q, R], ('P', 'Q', 'R'))
+
+# Atur label untuk jumlah elemen di setiap irisan
+if venn.get_label_by_id('100'):
+    venn.get_label_by_id('100').set_text(f"P\n{len(P)}")
+if venn.get_label_by_id('010'):
+    venn.get_label_by_id('010').set_text(f"Q\n{len(Q)}")
+if venn.get_label_by_id('001'):
+    venn.get_label_by_id('001').set_text(f"R\n{len(R)}")
+if venn.get_label_by_id('110'):
+    venn.get_label_by_id('110').set_text(f"P ∩ Q\n{len(P & Q)}")
+if venn.get_label_by_id('101'):
+    venn.get_label_by_id('101').set_text(f"P ∩ R\n{len(P & R)}")
+if venn.get_label_by_id('011'):
+    venn.get_label_by_id('011').set_text(f"Q ∩ R\n{len(Q & R)}")
+if venn.get_label_by_id('111'):
+    venn.get_label_by_id('111').set_text(f"P ∩ Q ∩ R\n{len(P & Q & R)}")
+
+# Tambahkan judul pada plot
+plt.title("Diagram Venn untuk Himpunan P, Q, dan R")
+
+# Tampilkan diagram
+plt.show() 
